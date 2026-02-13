@@ -1,5 +1,13 @@
 import csv
 
+###Variables for Serial Generation
+ITEM_TOTE = "10"
+ITEM_ROBOT = "11"
+ITEM_BAG = "21"
+OUTPUT_CSV = "production_bags.csv"
+LABEL_COUNT = 100
+LABEL_START_NUM = 51
+
 def calculate_pure_mod97(base_string):
     """Calculates the pure remainder (Modulo 97)."""
     # Remove spaces and treat the entire string as one large integer
@@ -9,19 +17,19 @@ def calculate_pure_mod97(base_string):
     return f"{remainder:02d}"
 
 def generate_serials(count):
-    filename = "robot_serials.csv"
+    filename = OUTPUT_CSV
     header = ["qr_data"]
     
-    # Fixed parts of your updated serial
     # Format: 01 11 000 01XXXXX 00 CS
-    prefix = "01 11 000"
+    #prefix = "01 21 000"
+    prefix = f"01 {ITEM_BAG} 000"
     suffix_fixed = "00"
     
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(header)
         
-        for i in range(1, count + 1):
+        for i in range(LABEL_START_NUM, count + 1):
             # 01XXXXX format with 5 digits for the 'X' count
             # This results in a 7-digit block: '01' + '00001'
             serial_int_field = f"01{i:05d}"
@@ -39,5 +47,5 @@ def generate_serials(count):
     print(f"Success! {count} serials saved to {filename}")
 
 if __name__ == "__main__":
-    # Generating 10 robots as requested
-    generate_serials(10)
+    
+    generate_serials(LABEL_COUNT)
