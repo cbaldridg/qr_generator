@@ -5,8 +5,8 @@ ITEM_TOTE = "10"
 ITEM_ROBOT = "11"
 ITEM_BAG = "21"
 OUTPUT_CSV = "production_bags.csv"
-LABEL_COUNT = 100
-LABEL_START_NUM = 51
+LABEL_COUNT = 200
+LABEL_START_NUM = 101
 
 def calculate_pure_mod97(base_string):
     """Calculates the pure remainder (Modulo 97)."""
@@ -22,7 +22,7 @@ def generate_serials(count):
     
     # Format: 01 11 000 01XXXXX 00 CS
     #prefix = "01 21 000"
-    prefix = f"01 {ITEM_BAG} 000"
+    prefix = f"01 {ITEM_TOTE} 000"
     suffix_fixed = "00"
     
     with open(filename, mode='w', newline='') as file:
